@@ -1,7 +1,10 @@
-#ifndef "SORT_H"
+#ifndef SORT_H
 
 
-#define "SORT_H"
+#define SORT_H
+#include <stdio.h>
+#include <stddef.h>
+#include <stdlib.h>
 
 
 void bubble_sort(int *array, size_t size);
@@ -66,4 +69,4 @@ typedef struct listint_s
     struct listint_s *next;
 } listint_t;
 
-#endif /** SORT_H **\
+#endif
