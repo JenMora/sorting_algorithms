@@ -40,8 +40,8 @@ void insertion_sort_list(listint_t **list)
 
 			print_list(*list);
 
-			prev = _main->prev
+			prev = _main->prev;
 		}
-		my_list = my_list->next
+		my_list = my_list->next;
 	}
 }
