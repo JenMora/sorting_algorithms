@@ -13,6 +13,10 @@ int swapped;
 size_t i = 0;
 size_t j = 0;
 
+if  (size <= 1)
+{
+return;
+}
 
 for (i = 0; i < size - 1; i++)
 {
