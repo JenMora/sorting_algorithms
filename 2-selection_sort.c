@@ -28,15 +28,7 @@ void selection_sort(int *array, size_t size)
 			tmp = array[a];
 			array[a] = array[c];
 			array[c] = tmp;
-
+			print_array(array, size);
 		}
-
-		for (b = 0; b < size; b++)
-		{
-			printf("%d", array[b]);
-			if (b != size - 1)
-				printf(", ");
-		}
-		printf("\n");
 	}
 }
