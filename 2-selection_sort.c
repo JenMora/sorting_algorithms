@@ -14,6 +14,11 @@ void selection_sort(int *array, size_t size)
 	size_t c;
 	int tmp;
 
+	if (size <= 1)
+	{
+		return;
+	}
+
 	for (a = 0; a < size - 1; a++)
 	{
 		c = a;
