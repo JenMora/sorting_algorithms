@@ -26,7 +26,12 @@ return (value_cmp);
 }
 else
 {
-return (card_a->kind - card_b->kind);
+if (card_a->kind < card_b->kind)
+return -1;
+else if (card_a->kind > card_b->kind)
+return 1;
+else
+return 0;
 }
 }
 
