@@ -1,7 +1,7 @@
 #include "sort.h"
 
 /**
- * shell_sort - Sorts an array of integers in ascending order using 
+ * shell_sort - Sorts an array of integers in ascending order using
  * Shell sort algorithm
  * @array: pointer to array to be sorted
  * @size: the size of array
