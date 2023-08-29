@@ -46,8 +46,8 @@ quick_sort_r(arr, pivot_index + 1, the_end, size);
 /**
 * hoares_partition - Partitioning function based on Hoare's scheme.
 * @arr: Array to be partitioned.
-* @low: Starting index of the partition.
-* @high: Ending index of the partition.
+* @the_low: Starting index of the partition.
+* @the_high: Ending index of the partition.
 * @size: Size of the array.
 *
 * Return: Index of the partition.
@@ -70,7 +70,7 @@ j--;
 
 if (i > j)
 {
-return j;
+return (j);
 }
 if (i < j)
 {
