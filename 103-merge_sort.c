@@ -1,92 +1,106 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "sort.h"
 
 /**
-* merge - Merge two sub-arrays of array[]
-* @array: The original array
-* @left: Index of the left sub-array
-* @middle: Index of the middle element
-* @right: Index of the right sub-array
+* customMerge - this function merges an array
+* @arr: array to sort
+* @copy: copy array
+* @start: start index
+* @end: end index + 1
+* @middle: middle index
+* Return: nothing
 */
-void merge(int *array, int left, int middle, int right)
+void customMerge(int *arr, int *copy, int start, int end, int middle)
 {
-int i, j, k;
-int n1 = middle - left + 1;
-int n2 = right - middle;
+int i = start, j = middle, k, flag;
 
-int *leftArray = malloc(n1 * sizeof(int));
-int *rightArray = malloc(n2 * sizeof(int));
-
-for (i = 0; i < n1; i++)
-leftArray[i] = array[left + i];
-for (j = 0; j < n2; j++)
-rightArray[j] = array[middle + 1 + j];
-
-i = 0;
-j = 0;
-k = left;
-while (i < n1 && j < n2)
+printf("Merging...\n");
+printf("[left]: ");
+flag = 0;
+for (i = start; i < middle; i++)
 {
-if (leftArray[i] <= rightArray[j])
-array[k++] = leftArray[i++];
+if (flag)
+printf(", ");
+printf("%d", arr[i]);
+flag = 1;
+}
+printf("\n[right]: ");
+flag = 0;
+for (i = middle; i < end; i++)
+{
+if (flag)
+printf(", ");
+printf("%d", arr[i]);
+flag = 1;
+}
+printf("\n");
+
+i = start;
+j = middle;
+for (k = start; k < end; k++)
+{
+if (i < middle && (j >= end || arr[i] <= arr[j]))
+{
+copy[k] = arr[i];
+i++;
+}
 else
-array[k++] = rightArray[j++];
+{
+copy[k] = arr[j];
+j++;
+}
 }
 
-while (i < n1)
-array[k++] = leftArray[i++];
-while (j < n2)
-array[k++] = rightArray[j++];
-
-free(leftArray);
-free(rightArray);
+for (k = start; k < end; k++)
+arr[k] = copy[k];
 }
 
 /**
-* merge_sort_helper - Recursive function to perform merge sort
-* @array: The array to be sorted
-* @left: Index of the left sub-array
-* @right: Index of the right sub-array
+* customMergeSort - This function merges an array and is a starting point
+* @arr: array to sort
+* @copy: copy array
+* @start: start index
+* @end: end index + 1
+* Return: nothing
 */
-void merge_sort_helper(int *array, int left, int right)
+void customMergeSort(int *arr, int *copy, int start, int end)
 {
-if (left < right)
+int middle, k;
+
+if (end - start <= 1)
+return;
+
+middle = (start + end) / 2;
+customMergeSort(arr, copy, start, middle);
+customMergeSort(arr, copy, middle, end);
+customMerge(arr, copy, start, end, middle);
+
+printf("[Done]: ");
+for (k = start; k < end; k++)
 {
-int middle = left + (right - left) / 2;
-merge_sort_helper(array, left, middle);
-merge_sort_helper(array, middle + 1, right);
-merge(array, left, middle, right);
+if (k != start)
+printf(", ");
+printf("%d", arr[k]);
 }
+printf("\n");
 }
 
 /**
-* merge_sort - Sorts an array of integers using merge sort algorithm
-* @array: The array to be sorted
-* @size: Number of elements in the array
+* merge_sort - A function that  merge sort starting point
+* @array: array to sort
+* @size: length of the array
+* Return: nothing
 */
 void merge_sort(int *array, size_t size)
 {
-if (array == NULL || size <= 1)
-return;
-merge_sort_helper(array, 0, size - 1);
+size_t k;
+int *copy_arr = malloc(sizeof(int) * size);
+
+/* Create a copy array */
+for (k = 0; k < size; k++)
+copy_arr[k] = array[k];
+
+/* Sort */
+customMergeSort(array, copy_arr, 0, size);
+
+free(copy_arr);
 }
-
-/**
-* print_array - Prints an array of integers
-* @array: The array to be printed
-* @size: Number of elements in the array
-
-*void print_array(int *array, size_t size)
-*{
-*size_t i;
-
-*for (i = 0; i < size; i++)
-*{
-*printf("%d", array[i]);
-*if (i < size - 1)
-*printf(", ");
-*}
-*printf("\n");
-*}
-*/
-
