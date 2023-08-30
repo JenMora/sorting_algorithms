@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/**
+* swap - Swaps two integer values.
+* @a: Pointer to the first integer.
+* @b: Pointer to the second integer.
+*/
+void swap(int *a, int *b)
+{
+int temp = *a;
+*a = *b;
+*b = temp;
+}
+
+/**
+* heapify - Heapify a subtree rooted at the given index.
+* @array: Array to be heapified.
+* @size: Size of the array.
+* @index: Index to start heapifying from.
+*/
+void heapify(int *array, size_t size, int index)
+{
+int largest = index;
+int left = 2 * index + 1;
+int right = 2 * index + 2;
+
+if (left < size && array[left] > array[largest])
+largest = left;
+
+if (right < size && array[right] > array[largest])
+largest = right;
+
+if (largest != index)
+{
+swap(&array[index], &array[largest]);
+printf("Swapped: %d and %d\n", array[index], array[largest]);
+heapify(array, size, largest);
+}
+}
+
+/**
+* heap_sort - Sorts an array of integers using the Heap sort algorithm.
+* @array: Array to be sorted.
+* @size: Size of the array.
+*/
+void heap_sort(int *array, size_t size)
+{
+	
+for (int i = size / 2 - 1; i >= 0; i--)
+heapify(array, size, i);
+
+for (int i = size - 1; i > 0; i--)
+{
+swap(&array[0], &array[i]);
+printf("Swapped: %d and %d\n", array[0], array[i]);
+heapify(array, i, 0);
+}
+}
+
